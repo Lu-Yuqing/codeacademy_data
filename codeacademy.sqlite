@@ -1,0 +1,109 @@
+-- check tables
+
+SELECT * FROM users
+LIMIT 10;
+SELECT * FROM progress
+LIMIT 10;
+
+-- Top 25 schools based on email domain
+
+SELECT email_domain, COUNT(*)
+FROM users
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 25;
+
+-- number of .edu learners in New York
+
+SELECT city, COUNT(*)
+FROM users
+WHERE city = 'New York';
+
+-- number of mobile app user
+
+SELECT COUNT(mobile_app)
+FROM users
+WHERE mobile_app = 'mobile-user';
+
+-- get percentage
+
+SELECT mobile_app,
+  100 * COUNT(*) / (SELECT COUNT(*) FROM users) as '%'
+FROM users
+GROUP BY 1;
+
+-- query for the sign up counts for each hour
+
+SELECT strftime('%H', sign_up_at), COUNT(*)
+FROM users
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- join two table, use inner join
+-- alias for table name, user:u, progress：p
+
+SELECT u.user_id,
+  u.email_domain,
+  u.country,
+  u.city,
+  p.learn_cpp,
+  p.learn_sql,
+  p.learn_html,
+  p.learn_javascript,
+  p.learn_java
+FROM users AS u
+JOIN progress AS p 
+  ON u.user_id = p.user_id
+LIMIT 10;
+
+-- different schools prefer different courses? YES
+
+SELECT u.email_domain,
+  u.country,
+  u.city,
+  p.learn_cpp,
+  p.learn_sql,
+  p.learn_html,
+  p.learn_javascript,
+  p.learn_java
+FROM users AS u
+JOIN progress AS p 
+  ON u.user_id = p.user_id
+GROUP BY 1
+ORDER BY 2;
+
+-- What courses are the New Yorkers students taking?
+
+SELECT u.email_domain,
+  u.city,
+  p.learn_cpp,
+  p.learn_sql,
+  p.learn_html,
+  p.learn_javascript,
+  p.learn_java
+FROM users AS u
+JOIN progress AS p
+  ON u.user_id = p.user_id
+WHERE u.city = 'New York'
+GROUP BY 1;
+
+-- What courses are the Chicago students taking?
+
+SELECT u.email_domain,
+  u.city,
+  p.learn_cpp,
+  p.learn_sql,
+  p.learn_html,
+  p.learn_javascript,
+  p.learn_java
+FROM users AS u
+JOIN progress AS p
+  ON u.user_id = p.user_id
+WHERE u.city = 'Chicago'
+GROUP BY 1;
+
+
+
+
+
+
