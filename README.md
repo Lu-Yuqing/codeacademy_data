@@ -1,4 +1,4 @@
-# codeacademy_data
+# codecademy_data
 
 Codeacademy learner data analysis\
 Two tables: users, progress\
