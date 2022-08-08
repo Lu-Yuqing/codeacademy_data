@@ -1,7 +1,7 @@
 # codeacademy_data
 
-Codeacademy learner data analysis
-tow tables: users, progress
+Codeacademy learner data analysis\
+tow tables: users, progress\
 Table users includes user_id, email_domain, country, city, postal, mobile_app, sign_up_at
 Table progress includes user_id, learn_cpp, learn_sql, learn_html, learn_javascript, learn_java
 
